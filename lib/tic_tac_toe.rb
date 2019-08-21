@@ -103,6 +103,13 @@ class TicTacToe
     end
     display_board
     turn_count
+  end
+
+  def won?
+    if @board.count("X") == @board.count("O") && !(WIN_COMBINATIONS)
+      false
+    end
+    WIN_COMBINATIONS.each {|won| won == true return won}
 
 
   end
