@@ -94,10 +94,11 @@ class TicTacToe
       move(@index, @token)
 
     else
-      turn
-      # puts "Not a valid move. Please enter a number between 1 - 9..."
-      # user = gets.chomp.to_i
-      # @index = input_to_index(user)
+      puts "Not a valid move. Please enter a number between 1 - 9..."
+      user = gets.chomp.to_i
+      @index = input_to_index(user)
+      @token = current_player
+      move(@index, @token)
 
     end
     display_board
