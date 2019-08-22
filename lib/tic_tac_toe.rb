@@ -117,25 +117,49 @@ class TicTacToe
   
   def full?
     board.each do |index| 
-      if index != " " && !won?
-        return true
-      end
-    end
-   puts "All plays are complete!"
-
-    
-binding.pry      
-    valid_move.each do |index|      
-      if board[index] == " " && !won?
-      else
+      if turn_count < 9 && !won?
         return false
+        
+      elsif index != " " && !won?
+        return true
+  
       end
+      puts "All plays are complete!"
+
     end
-   
-   
-   
-    
-      
   end
+  
+  def draw?
+    board.collect do |index|
+      
+      if !won? == false
+        return false
+      end   
+      
+      index != " " && !won? && turn_count = 9
+
+    end
+  end
+  
+  def over?
+  if won?
+    return true
+  end
+  if turn_count < 9 && !won?
+    return false
+  end
+  
+    draw?
+
+  end
+  
+  def winner
+    @board.detect |winner|
+binding.pry
+      puts winner
+    end
+ 
+  end
+      
 
 end
