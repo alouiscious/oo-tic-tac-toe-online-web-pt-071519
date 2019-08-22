@@ -4,7 +4,6 @@ class TicTacToe
   attr_accessor :board, :user, :index, :turn, :turn_count
 
 
-
   WIN_COMBINATIONS = [
     [0,1,2],
     [3,4,5],
@@ -16,19 +15,26 @@ class TicTacToe
     [2,5,8],
 
   ]
-  def display_board
-    # board.each do |board, index|
-      puts " #{@board[0]} | #{@board[1]} | #{@board[2]} \n"
-      puts "-----------\n"
-      puts " #{@board[3]} | #{@board[4]} | #{@board[5]} \n"
-      puts "-----------\n"
-      puts " #{@board[6]} | #{@board[7]} | #{@board[8]} \n"
-    # end
+
+  def initialize
+    @board = Array.new(9, " ")
+    self
+
+    WIN_COMBINATIONS
 
   end
 
 
+  def display_board
+    # board.each do |board, index|
+      puts " #{board[0]} | #{board[1]} | #{board[2]} \n"
+      puts "-----------\n"
+      puts " #{board[3]} | #{board[4]} | #{board[5]} \n"
+      puts "-----------\n"
+      puts " #{board[6]} | #{board[7]} | #{board[8]} \n"
+    # end
 
+  end
 
   def input_to_index(user)
     input = user.to_i
@@ -38,28 +44,21 @@ class TicTacToe
 
   end
 
-
-  def initialize
-    @board = Array.new(9, " ")
-    self
-
-    # self.board = board
-    WIN_COMBINATIONS
-
-  end
-
   def move(index, token = "X")
-    @board[index] = token
+    board[index] = token
 
   end
 
   def position_taken?(index)
-    self.board[index] != " "
+    board[index] != " " && board[index] != ""
+
   end
 
-  def valid_move?(user)
-    @user == (1..9)
-    @board[user] == " "
+  def valid_move?(index)
+# binding.pry
+    index.between?(0,8) && !position_taken?(index)
+    # user == (0..8) && !position_taken?(user)
+    # return user
   end
 
 
@@ -84,9 +83,8 @@ class TicTacToe
   end
 
   def turn
-
     puts "Please enter a number between 1 - 9... "
-    user = gets.chomp.to_i
+    user = gets.chomp
     @index = input_to_index(user)
 
     if valid_move?(@index)
@@ -94,22 +92,52 @@ class TicTacToe
       move(@index, @token)
 
     else
-      puts "Not a valid move. Please enter a number between 1 - 9..."
-      user = gets.chomp.to_i
-      @index = input_to_index(user)
-      @token = current_player
-      move(@index, @token)
+      puts "Not a valid move."
+      turn
+      # user = gets.chomp.to_i
+      # @index = input_to_index(user)
+      # @token = current_player
+      # move(@index, @token)
 
     end
     display_board
     turn_count
   end
 
+
+
   def won?
-    if @board.count("X") == @board.count("O") && !(WIN_COMBINATIONS)
-      false
+    win_array = []
+
+    WIN_COMBINATIONS.each do |winner|
+      # winner = winner.join(", ")
+      winner.each do |index|
+        win_array << board[index]
+      end
+      # binding.pry
+
+      if !win_array.eql?("X") && !win_array.eql?("Y")
+        return false
+      end
+
+      binding.pry
+        winner.collect.to_a
+
+
+      # elsif
+      #   if win_array.collect?("X")
+      #     puts "X W"
+      #   elsif win_array.eql?("Y")
+      #     puts "Y W"
+      #   end
+      # else
+      #   win_array = []
+      # end
     end
-    WIN_COMBINATIONS.each {|won| won == true return won}
+
+
+
+
 
 
   end
