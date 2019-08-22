@@ -107,36 +107,35 @@ class TicTacToe
 
 
   def won?
-    win_array = []
-
-    WIN_COMBINATIONS.each do |winner|
-      # winner = winner.join(", ")
-      winner.each do |index|
-        win_array << board[index]
+    WIN_COMBINATIONS.detect do |winner|
+      position_taken?(winner[0]) && @board[winner[0]] == 
+      @board[winner[1]] && @board[winner[1]] == 
+      @board[winner[2]]
+    end
+  end
+  
+  
+  def full?
+    board.each do |index| 
+      if index != " " && !won?
+        return true
       end
-      # binding.pry
+    end
+   puts "All plays are complete!"
 
-      if !win_array.eql?("X") && !win_array.eql?("Y")
+    
+binding.pry      
+    valid_move.each do |index|      
+      if board[index] == " " && !won?
+      else
         return false
       end
-binding.pry
-
-      winner.collect do |array|
-        array.each do |win|
-          array[win].eql?("X")
-          puts "X W"
-        end
-      end
-      # elsif
-      #   if win_array.collect?("X")
-      #     puts "X W"
-      #   elsif win_array.eql?("Y")
-      #     puts "Y W"
-      #   end
-      # else
-      #   win_array = []
-      # end
     end
+   
+   
+   
+    
+      
   end
 
 end
