@@ -119,11 +119,14 @@ class TicTacToe
       if !win_array.eql?("X") && !win_array.eql?("Y")
         return false
       end
+binding.pry
 
-      binding.pry
-        winner.collect.to_a
-
-
+      winner.collect do |array|
+        array.each do |win|
+          array[win].eql?("X")
+          puts "X W"
+        end
+      end
       # elsif
       #   if win_array.collect?("X")
       #     puts "X W"
@@ -134,12 +137,6 @@ class TicTacToe
       #   win_array = []
       # end
     end
-
-
-
-
-
-
   end
 
 end
