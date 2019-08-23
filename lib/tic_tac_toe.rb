@@ -82,7 +82,7 @@ class TicTacToe
 
   def turn
     puts "Please enter a number between 1 - 9... "
-    user = gets.chomp
+    user = gets.chomp!
     @index = input_to_index(user)
 
     if valid_move?(@index)
@@ -92,10 +92,6 @@ class TicTacToe
     else
       puts "Not a valid move."
       turn
-      # user = gets.chomp.to_i
-      # @index = input_to_index(user)
-      # @token = current_player
-      # move(@index, @token)
 
     end
     display_board
@@ -166,19 +162,28 @@ class TicTacToe
   
   
   def play
-    while turn_count <= 9
-    
-      if over? && winner && !draw?
-        puts "Congratulations #{winner}!"
-      end
-      
-      if draw? && over?
-        puts "Cat's game!"
-      end
 
+    if turn_count <=3 || !winner
       turn
+      over?
+      draw?
+
     end
     
+    
+    if winner == "X"
+      
+      print "Congratulations #{winner}!"
+      # exit!
+    end
+    
+    if draw?
+      print "Cat's Game!"
+      
+    elsif over? && draw?
+      print "Cat's Game!"
+    end
+
 
     
   end

@@ -4,6 +4,6 @@ require_relative '../lib/tic_tac_toe.rb'
 
 
 def initialize(board)
-  TicTacToe = tic_tac_toe.new
-  tic_tac_toe.play
+  TicTacToe = TicTacToe.new
+  TicTacToe.play
 end
