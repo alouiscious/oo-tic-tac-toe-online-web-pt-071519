@@ -55,10 +55,8 @@ class TicTacToe
   end
 
   def valid_move?(index)
-# binding.pry
     index.between?(0,8) && !position_taken?(index)
-    # user == (0..8) && !position_taken?(user)
-    # return user
+
   end
 
 
@@ -108,7 +106,7 @@ class TicTacToe
 
   def won?
     WIN_COMBINATIONS.detect do |winner|
-      position_taken?(winner[0]) && @board[winner[0]] == 
+      position_taken?(winner[0]) && @board[winner[0]] ==
       @board[winner[1]] && @board[winner[1]] == 
       @board[winner[2]]
     end
@@ -142,24 +140,47 @@ class TicTacToe
   end
   
   def over?
-  if won?
-    return true
-  end
-  if turn_count < 9 && !won?
-    return false
-  end
-  
+    if won?
+      return true
+    end
+    if turn_count < 9 && !won?
+      return false
+    end
+    
     draw?
 
   end
   
   def winner
-    @board.detect |winner|
-binding.pry
-      puts winner
+    won?
+    
+    WIN_COMBINATIONS.detect do |winner| 
+# binding.pry      
+       if position_taken?(winner[0]) && @board[winner[0]] == @board[winner[1]] && @board[winner[1]] == @board[winner[2]]
+         
+         return @board[winner[0]]
+         
+       end
     end
- 
   end
+  
+  
+  def play
+    while turn_count <= 9
+    
+      if over? && winner && !draw?
+        puts "Congratulations #{winner}!"
+      end
       
+      if draw? && over?
+        puts "Cat's game!"
+      end
+
+      turn
+    end
+    
+
+    
+  end
 
 end
