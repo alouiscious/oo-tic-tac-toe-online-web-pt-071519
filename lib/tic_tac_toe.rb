@@ -160,12 +160,12 @@ class TicTacToe
 
 
   def play
-    turn
-    if !over? && turn_count <= 3
+     if !over? && turn_count <= 3
       turn
-      over?
-
     end
+    
+    turn until over?
+   
     # if winner
     #   print "Congratulations #{winner}!"
     # end
