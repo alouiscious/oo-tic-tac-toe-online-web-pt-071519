@@ -89,7 +89,9 @@ class TicTacToe
 
     else
       puts "Not a valid move."
-      turn
+      puts "Please enter a number between 1 - 9... "
+      user = gets.chomp
+      
 
     end
     display_board
