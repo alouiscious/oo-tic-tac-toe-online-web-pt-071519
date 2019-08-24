@@ -68,8 +68,6 @@ class TicTacToe
   end
 
   def current_player
-    # @turn_count
-
     if turn_count.even?
       return "X"
       puts "It's Team X's turn\n Enter 1-9..."
@@ -82,7 +80,7 @@ class TicTacToe
 
   def turn
     puts "Please enter a number between 1 - 9... "
-    user = gets.chomp!
+    user = gets.chomp
     @index = input_to_index(user)
 
     if valid_move?(@index)
@@ -103,38 +101,38 @@ class TicTacToe
   def won?
     WIN_COMBINATIONS.detect do |winner|
       position_taken?(winner[0]) && @board[winner[0]] ==
-      @board[winner[1]] && @board[winner[1]] == 
+      @board[winner[1]] && @board[winner[1]] ==
       @board[winner[2]]
     end
   end
-  
-  
+
+
   def full?
-    board.each do |index| 
+    board.each do |index|
       if turn_count < 9 && !won?
         return false
-        
+
       elsif index != " " && !won?
         return true
-  
+
       end
       puts "All plays are complete!"
 
     end
   end
-  
+
   def draw?
     board.collect do |index|
-      
+
       if !won? == false
         return false
-      end   
-      
+      end
+
       index != " " && !won? && turn_count = 9
 
     end
   end
-  
+
   def over?
     if won?
       return true
@@ -142,50 +140,57 @@ class TicTacToe
     if turn_count < 9 && !won?
       return false
     end
-    
+
     draw?
 
   end
-  
+
   def winner
     won?
-    
-    WIN_COMBINATIONS.detect do |winner| 
-# binding.pry      
+
+    WIN_COMBINATIONS.detect do |winner|
+# binding.pry
        if position_taken?(winner[0]) && @board[winner[0]] == @board[winner[1]] && @board[winner[1]] == @board[winner[2]]
-         
+
          return @board[winner[0]]
-         
+
        end
     end
   end
-  
-  
-  def play
 
-    if turn_count <=3 || !winner
+
+  def play
+    turn
+    if !over? && turn_count <= 3
       turn
       over?
-      draw?
 
     end
-    
-    
-    if winner == "X"
-      
-      print "Congratulations #{winner}!"
-      # exit!
-    end
-    
-    if draw?
-      print "Cat's Game!"
-      
-    elsif over? && draw?
-      print "Cat's Game!"
-    end
-
-
-    
+    # if winner
+    #   print "Congratulations #{winner}!"
+    # end
+    # if draw?
+    #   print "Cat's Game!"
+    #
+    # elsif over? && draw?
+    #   print "Cat's Game!"
+    # end
+#
+    # if over?
+    #   print "Play again (yes/no)?"
+    #   play_again = gets.chomp
+    #   if play_again == "yes"
+    #     TicTacToe.new
+    #   else
+    #     exit
+    #   end
+    # end
+  #   if !over?
+  #     turn
+  #     over?
+  #     draw?
+  #   end
+  #
   end
 
 end
